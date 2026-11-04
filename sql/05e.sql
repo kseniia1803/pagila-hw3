@@ -1,4 +1,4 @@
-/* 
+/*
  * You've decided that you don't actually like ACADEMY DINOSAUR and AGENT TRUMAN,
  * and want to focus on more movies that are similar to AMERICAN CIRCUS.
  * This time, however, you don't want to focus only on movies with similar actors.
@@ -18,3 +18,14 @@
  * ```
  * This problem should be solved by a self join on the "film_category" table.
  */
+
+SELECT f1.title
+FROM film_category fc1
+JOIN film_category fc2 USING (category_id)
+JOIN film f1 ON fc1.film_id = f1.film_id
+JOIN film f2 ON fc2.film_id = f2.film_id
+WHERE f2.title = 'AMERICAN CIRCUS'
+GROUP BY f1.title
+HAVING count(*) >= 2
+ORDER BY f1.title;
+
